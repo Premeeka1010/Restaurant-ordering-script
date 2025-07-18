@@ -1,4 +1,6 @@
 #Define menu pf restaurant
+# Restaurant ordering script
+
 menu = {
     'Burger': 80,
     'Pizza': 100,
@@ -10,24 +12,22 @@ menu = {
 
 print("Welcome to our restaurant!")
 print("Here is our menu:")
-print("Pizza: Rs.100 \nBurger: Rs.80 \nSalad: Rs.70 \nSandwich: Rs.90 \nFries: Rs.20 \nCoffee: Rs.30")
+for item, price in menu.items():
+    print(f"{item}: Rs.{price}")
 
-Order_total = 0
+order_total = 0
 
-item_1 = input("Enter the name of item you want to order: ")
-if item_1 in menu:
-    Order_total += menu[item_1]
-    print(f"Your item {item_1} has been added to your order")
-else:
-    print(f"Sorry! Ordered item {item_1} is not available")
-
-another_order = input("Do you want to add another item? (Yes/No): ").strip()
-if another_order == "yes":
-    item_2 = input("Enter the name of item you want to order: ")
-    if item_2 in menu:
-        Order_total += menu[item_2]
-        print(f"Your item {item_2} has been added to your order")
+while True:
+    item = input("\nEnter the name of the item you want to order: ").strip().title()
+    if item in menu:
+        order_total += menu[item]
+        print(f" Added '{item}' to your order. (Rs.{menu[item]})")
     else:
-        print(f"Sorry! Ordered item {item_2} is not available")
+        print(f" Sorry, '{item}' is not on the menu.")
 
-print(f"The total amount of items is Rs. {Order_total} to pay")
+    more = input("Do you want to add another item? (yes/no): ").strip().lower()
+    if more != 'yes':
+        break
+
+print(f"\nYour total amount to pay is Rs. {order_total}.")
+print("Thanks for your order! ")
